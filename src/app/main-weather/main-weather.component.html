@@ -1,0 +1,78 @@
+
+<div class="container-fluid">
+
+  <app-weather-search></app-weather-search>
+</div>
+
+  <div class="container">
+
+
+    <div class="row mt-3">
+
+      <div class="col-2">
+          <div class="card" style="width:14rem"  fxFlexAlign="stretch">
+              <div class="card-body">
+                  <h5 class="card-title" >{{selectedLocation.cityName}} </h5>
+                  <p>{{selectedLocation.temperature}} </p>
+                  <p> {{selectedLocation.weatherType}} </p>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-2">
+        <button  *ngIf="isCelcius"class="btn btn-primary" (click)="toggleMetric()"> Show in Fahrenheit</button>
+        <button  *ngIf="!isCelcius"class="btn btn-primary" (click)="toggleMetric()"> Show in Celcius</button>
+
+     </div>
+
+     <div class="col-6">
+
+        
+     </div>
+
+      <div class="col-2">
+          <div *ngIf="!selectedLocation.isFavorite else addedToFavoriteBefore">
+                <button *ngIf="!selectedLocation.isFavorite else addedToFavoriteBefore" class="btn btn-primary pull-right" (click)="addToFavorite()"> Add To Favorites</button>
+          </div>
+
+          <div *ngIf="selectedLocation.isFavorite else addedToFavoriteBefore">
+            <div class="row">
+                <span class="btn btn-primary pull-right glyphicon glyphicon-heart"> </span>
+                <button class="btn btn-primary pull-right" (click)="addToFavorite()"> Remove From Favorite</button>
+            </div>
+          </div>
+      </div>
+
+  </div>
+
+
+  <div class="row justify-content-center mt-3 mb-5">
+      <h2>{{selectedLocation.weatherType}}</h2>
+    </div>
+    
+  
+  <div class="row mb-3 mt-3"> 
+    <div class="col-10">
+      <div class="card-deck">
+        <div class="card border-primary" style="width:14rem"  fxFlexAlign="stretch" *ngFor="let week of weatherWeekly">
+            <div class="mt-1">
+              
+            <div class="card-body">
+                <h5 class="card-title" >{{week.day}} </h5>
+                <h4>{{week.maxTemp}} / {{week.minTemp}} </h4>
+                 <p> {{week.weatherType}} </p>  
+            </div>
+            </div> 
+       </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="alert alert-danger" *ngIf="error">
+      <h3>An Error Occured!</h3>
+      <p>{{error}}</p>
+    </div>
+
+   

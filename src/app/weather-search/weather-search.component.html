@@ -1,0 +1,36 @@
+<div class="row justify-content-md-center">
+        <form  [formGroup]="validatingForm" action="" class="example-form"   (ngSubmit)="onSubmit()" #f="ngForm"  >
+          
+          <mat-form-field class="example-full-width">
+
+              <div class="row">
+                  <div class="col-12">
+
+            <label for="search" class="sr-only">Search</label>
+            <input  pattern="[a-zA-Z]+" type="text" class="form-control py-2 border-left-0 border" (keyup)="onKey($event)"  [value]="option" type="search"    matInput [formControl]="myControl"  id="example-search-input" [matAutocomplete]="auto" />
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            
+          </div> 
+
+                   
+                </div>
+
+          
+          <mat-autocomplete #auto="matAutocomplete"  [displayWith]="getDisplayFn()" (optionSelected)="onSelectionChanged($event)">
+            <mat-option   *ngFor="let option of filteredOptions|async"  [value]="option">
+              <p> City:{{option.LocalizedName}},Country: {{option.Country.LocalizedName}} </p> 
+
+  
+              </mat-option>
+                          </mat-autocomplete>
+
+
+
+
+            
+
+          </mat-form-field>
+          
+        </form>
+</div>
+
